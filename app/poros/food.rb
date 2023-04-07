@@ -5,7 +5,7 @@ class Food
               :ingredients
               
   def initialize(info)
-    @gtin = info[:gtinUpc]
+    @gtin = info[:gtinUpc].to_i
     @description = info[:description]
     @brand = info[:brandOwner]
     @ingredients = info[:ingredients]

@@ -11,6 +11,8 @@ RSpec.describe FoodsService do
       expect(@foods_services.connection).to be_an_instance_of(Faraday::Connection)
       expect(@foods_services.connection.url_prefix.to_s).to include("https://api.nal.usda.gov/fdc/v1/")
       expect(@foods_services.connection.params["api_key"]).to eq(ENV['API_KEY'])
+      expect(@foods_services.connection.params["pageSize"]).to eq("10")
+      expect(@foods_services.connection.params["pageNumber"]).to eq("1")
     end
 
     it "returns JSON with all the info" do 
@@ -18,6 +20,12 @@ RSpec.describe FoodsService do
       expect(results).to be_a(Hash)
       expect(results[:foods]).to be_a(Array)
       expect(results[:foods].count).to eq(10)
+      results[:foods].each do |food_hash|
+        expect(food_hash[:description]).to be_a(String)
+        expect(food_hash[:gtinUpc].to_i).to be_a(Integer)
+        expect(food_hash[:brandOwner]).to be_a(String)
+        expect(food_hash[:ingredients]).to be_a(String)
+      end
       expect(results[:totalHits]).to be_a(Integer)
     end
 

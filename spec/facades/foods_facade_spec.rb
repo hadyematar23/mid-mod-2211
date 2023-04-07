@@ -7,10 +7,12 @@ RSpec.describe FoodsFacade do
       @foods_facade = FoodsFacade.new
     end
 
-    describe "it intakes the JSON hash and outputs Food Items as ruby objects" do 
+    describe "it intakes the JSON hash which contain multiple hashes and outputs Food Items as ruby objects" do 
       it "retreive_foods objects" do 
         results = @foods_facade.retrieve_foods("sweet potatoes")
         expect(results).to be_a(Array)
+        expect(results.count).to eq(10)
+
         results.each do |food|
           gtin = food.gtin 
           description = food.description

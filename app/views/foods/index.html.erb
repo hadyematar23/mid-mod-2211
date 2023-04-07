@@ -1,1 +1,17 @@
-Search Results 
+<h2>Results</h2>
+
+<%n = 1%>
+<%@results.each do |food|%>
+
+<div id="food_result">
+<h4>Results Number <%=n%></h4>
+  <p><%=food.brand%></p>
+  <p><%=food.description%></p>
+  <p><%=food.gtin%></p>
+  <p><%=food.ingredients%></p>
+  <br>
+  <br>
+  <br>
+</div>
+<%n = n+1%>
+<% end %>
