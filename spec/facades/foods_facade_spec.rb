@@ -7,7 +7,7 @@ RSpec.describe FoodsFacade do
       @foods_facade = FoodsFacade.new
     end
 
-    describe "it intakes the JSON hash which contain multiple hashes and outputs Food Items as ruby objects" do 
+    describe "it intakes the JSON hash from the services which contain multiple hashes and outputs ruby objects" do 
       it "retreive_foods objects" do 
         results = @foods_facade.retrieve_foods("sweet potatoes")
         expect(results).to be_a(Array)
@@ -23,6 +23,13 @@ RSpec.describe FoodsFacade do
           expect(food).to have_attributes(gtin: gtin, description: description, brand: brand, ingredients: ingredients)
         end
       end 
+
+      it "retreives total hits as a PORO object too" do 
+        @foods_facade.retrieve_foods("sweet potatoes")
+        results = @foods_facade.retrieve_total_hits("sweet potatoes")
+        expect(results).to be_an_instance_of(TotalHits)
+        expect(results.total_hits).to be_a(Integer)
+      end
     end
   end 
 end 

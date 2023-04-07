@@ -15,7 +15,7 @@ RSpec.describe FoodsService do
       expect(@foods_services.connection.params["pageNumber"]).to eq("1")
     end
 
-    it "returns JSON with all the info" do 
+    it "returns JSON with all the info, including the individual foods as an array within a larger key of foods" do 
       results = @foods_services.make_food_search_api("sweet potatoes")
       expect(results).to be_a(Hash)
       expect(results[:foods]).to be_a(Array)
@@ -29,7 +29,7 @@ RSpec.describe FoodsService do
       expect(results[:totalHits]).to be_a(Integer)
     end
 
-    it "renders only ten items within the JSON hash" do 
+    it "renders only ten elements of the array within the JSON hash, each one having the same keys detailed above" do 
       results = @foods_services.make_food_search_api("sweet potatoes")
       expect(results[:foods].count).to eq(10)
       results[:foods].each do |food_json|

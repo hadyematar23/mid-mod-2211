@@ -1,6 +1,14 @@
 class FoodsController < ApplicationController
-  def index 
-    @results = FoodsFacade.new.retrieve_foods(params[:q])
+  before_action :create_facade 
 
+  def index 
+    @results = @facade.retrieve_foods(params[:q])
+    @total_hits = @facade.retrieve_total_hits(params[:q])
+  end
+
+  private 
+
+  def create_facade 
+    @facade ||= FoodsFacade.new
   end
 end

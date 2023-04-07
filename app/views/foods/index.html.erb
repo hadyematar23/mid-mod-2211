@@ -1,3 +1,8 @@
+Total Results 
+<div id=total_results>
+<%=@total_hits.total_hits%>
+</div>
+
 <h2>Results</h2>
 
 <%n = 1%>
@@ -7,16 +12,25 @@
 <h4>Results Number <%=n%></h4>
   
   <div id="food_brand">
+  Food Brand:
     <p><%=food.brand%></p>
   </div>
 
   <div id="food_description">
+  Food Description:
     <p><%=food.description%></p>
   </div>
 
-  
-  <p><%=food.gtin%></p>
-  <p><%=food.ingredients%></p>
+  <div id="food_gtin">
+  Food Gtin:
+    <p><%=food.gtin%></p>
+  </div>
+
+  <div id="food_ingredients">
+  Food Ingredients: 
+    <p><%=food.ingredients%></p>
+  </div>
+
   <br>
   <br>
   <br>
