@@ -4,12 +4,12 @@ RSpec.describe FoodsFacade do
 
   describe "FoodsFacade" do 
     before :each do 
-      @foods_facade = FoodsFacade.new
+      @foods_facade = FoodsFacade.new("sweet potatoes")
     end
 
-    describe "it intakes the JSON hash from the services which contain multiple hashes and outputs ruby objects" do 
+    describe "it intakes the JSON hash from the services which contain different information and outputs ruby objects" do 
       it "retreive_foods objects" do 
-        results = @foods_facade.retrieve_foods("sweet potatoes")
+        results = @foods_facade.retrieve_foods
         expect(results).to be_a(Array)
         expect(results.count).to eq(10)
 
@@ -25,8 +25,7 @@ RSpec.describe FoodsFacade do
       end 
 
       it "retreives total hits as a PORO object too" do 
-        @foods_facade.retrieve_foods("sweet potatoes")
-        results = @foods_facade.retrieve_total_hits("sweet potatoes")
+        results = @foods_facade.retrieve_total_hits
         expect(results).to be_an_instance_of(TotalHits)
         expect(results.total_hits).to be_a(Integer)
       end

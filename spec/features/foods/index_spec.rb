@@ -13,7 +13,7 @@ RSpec.describe "Food Index Page", type: :feature do
       
     end 
 
-    it "on the 'foods' page after searching for sweet potatoes, i should see the total number of results returned by the search" do 
+    it "on the 'foods' page after searching for sweet potatoes, i should see the total number of results returned by the search- in this case over 50,000" do 
       visit "/"
 
       fill_in "q", with: "sweet potatoes"
@@ -22,11 +22,13 @@ RSpec.describe "Food Index Page", type: :feature do
       expect(page).to have_content("Total Results")
       within("div#total_results") do 
         expect(page.text).to match(/\d+/)
+        total_results = page.text.match(/(\d+)/)[0].to_i
+        expect(total_results).to be > 50_000
       end
       
     end
 
-    it "when on the foods index page, you will se that there are results of the search and 10 divs for each food_results, representing the 10 different results" do 
+    it "when on the foods index page, you will see that there are results of the search and 10 divs for each food_results, representing the 10 different results" do 
 
       visit "/"
 
@@ -59,6 +61,5 @@ RSpec.describe "Food Index Page", type: :feature do
         end
       end
     end
-
   end
 end 

@@ -19,14 +19,12 @@ RSpec.describe FoodsService do
       results = @foods_services.make_food_search_api("sweet potatoes")
       expect(results).to be_a(Hash)
       expect(results[:foods]).to be_a(Array)
-      expect(results[:foods].count).to eq(10)
       results[:foods].each do |food_hash|
         expect(food_hash[:description]).to be_a(String)
         expect(food_hash[:gtinUpc].to_i).to be_a(Integer)
         expect(food_hash[:brandOwner]).to be_a(String)
         expect(food_hash[:ingredients]).to be_a(String)
       end
-      expect(results[:totalHits]).to be_a(Integer)
     end
 
     it "renders only ten elements of the array within the JSON hash, each one having the same keys detailed above" do 
@@ -38,6 +36,11 @@ RSpec.describe FoodsService do
         expect(food_json).to have_key(:gtinUpc)
         expect(food_json).to have_key(:ingredients)
       end
+    end
+
+    it "returns teh total number of hits also" do 
+      results = @foods_services.make_food_search_api("sweet potatoes")
+      expect(results[:totalHits]).to be_a(Integer)
     end
   end 
 end 
